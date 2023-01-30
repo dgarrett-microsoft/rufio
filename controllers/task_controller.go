@@ -155,7 +155,8 @@ func (r *TaskReconciler) reconcile(ctx context.Context, task *bmcv1alpha1.Task, 
 	now := metav1.Now()
 	task.Status.StartTime = &now
 	// run the specified Task in Task
-	if err := r.runTask(ctx, task.Spec.Task, bmcClient); err != nil {
+	complete, err := r.runTask(ctx, task.Spec.Task, bmcClient)
+	if err != nil {
 		// Set Task Condition Failed True
 		task.SetCondition(bmcv1alpha1.TaskFailed, bmcv1alpha1.ConditionTrue, bmcv1alpha1.WithTaskConditionMessage(err.Error()))
 		patchErr := r.patchStatus(ctx, task, taskPatch)
@@ -166,20 +167,31 @@ func (r *TaskReconciler) reconcile(ctx context.Context, task *bmcv1alpha1.Task, 
 		return ctrl.Result{}, err
 	}
 
+	if complete {
+		now := metav1.Now()
+		task.Status.CompletionTime = &now
+		task.SetCondition(bmcv1alpha1.TaskCompleted, bmcv1alpha1.ConditionTrue)
+	}
+
 	if err := r.patchStatus(ctx, task, taskPatch); err != nil {
 		return ctrl.Result{}, err
 	}
 
-	return ctrl.Result{}, nil
+	if complete {
+		return ctrl.Result{}, nil
+	} else {
+		return ctrl.Result{RequeueAfter: 1 * time.Second}, nil
+	}
 }
 
 // runTask executes the defined Task in a Task
-func (r *TaskReconciler) runTask(ctx context.Context, task bmcv1alpha1.Action, bmcClient BMCClient) error {
+func (r *TaskReconciler) runTask(ctx context.Context, task bmcv1alpha1.Action, bmcClient BMCClient) (bool, error) {
 	if task.PowerAction != nil {
 		_, err := bmcClient.SetPowerState(ctx, string(*task.PowerAction))
 		if err != nil {
-			return fmt.Errorf("failed to perform PowerAction: %v", err)
+			return false, fmt.Errorf("failed to perform PowerAction: %v", err)
 		}
+		return false, nil
 	}
 
 	if task.OneTimeBootDeviceAction != nil {
@@ -187,11 +199,18 @@ func (r *TaskReconciler) runTask(ctx context.Context, task bmcv1alpha1.Action, b
 		// setPersistent is false.
 		_, err := bmcClient.SetBootDevice(ctx, string(task.OneTimeBootDeviceAction.Devices[0]), false, task.OneTimeBootDeviceAction.EFIBoot)
 		if err != nil {
-			return fmt.Errorf("failed to perform OneTimeBootDeviceAction: %v", err)
+			return false, fmt.Errorf("failed to perform OneTimeBootDeviceAction: %v", err)
 		}
 	}
 
-	return nil
+	if task.VirtualMediaAction != nil {
+		_, err := bmcClient.SetVirtualMedia(ctx, string(task.VirtualMediaAction.Kind), task.VirtualMediaAction.MediaURL)
+		if err != nil {
+			return false, fmt.Errorf("failed to perform SetVirtualMedia: %v", err)
+		}
+	}
+
+	return true, nil
 }
 
 // checkTaskStatus checks if Task action completed.

@@ -125,6 +125,14 @@ github.com/evanphx/json-patch v4.12.0+incompatible h1:4onqiflcdA9EOZ4RxV643DvftH
 github.com/evanphx/json-patch v4.12.0+incompatible/go.mod h1:50XU6AFN0ol/bzJsmQLiYLvXMP4fmwYFNcr97nuDLSk=
 github.com/evanphx/json-patch/v5 v5.6.0 h1:b91NhWfaz02IuVxO9faSllyAtNXHMPkC5J8sJCLunww=
 github.com/evanphx/json-patch/v5 v5.6.0/go.mod h1:G79N1coSVB93tBe7j6PhzjmR3/2VvlbKOFpnXhI9Bw4=
+github.com/fintelia/bmclib/v2 v2.0.0-20230113233635-39125cde49ae h1:CuMEGCjPsW9IL1CGaMs5FRREsvAJHZvL2ObFyNqiAmk=
+github.com/fintelia/bmclib/v2 v2.0.0-20230113233635-39125cde49ae/go.mod h1:2HUSfpk9cdI69955us3orjKGlVr/SKNZg2DQZuNqsjQ=
+github.com/fintelia/bmclib/v2 v2.0.0-20230117182954-ad60133ef57e h1:fLFAsubOyxNkUFddQm36lkBdt5srCZXuaOC/xnj43Cw=
+github.com/fintelia/bmclib/v2 v2.0.0-20230117182954-ad60133ef57e/go.mod h1:2HUSfpk9cdI69955us3orjKGlVr/SKNZg2DQZuNqsjQ=
+github.com/fintelia/bmclib/v2 v2.0.0-20230117205339-289d9a5764e7 h1:euJjy3LjhK+rF4npejwRrlss51FyxOnrSTJQ14IbcLE=
+github.com/fintelia/bmclib/v2 v2.0.0-20230117205339-289d9a5764e7/go.mod h1:2HUSfpk9cdI69955us3orjKGlVr/SKNZg2DQZuNqsjQ=
+github.com/fintelia/bmclib/v2 v2.0.0-20230127234219-1e2dfc0bb733 h1:ktDKkW7M9e4vf1Xy11E8WVwVzthFM8czYfIjU3yUbYs=
+github.com/fintelia/bmclib/v2 v2.0.0-20230127234219-1e2dfc0bb733/go.mod h1:2HUSfpk9cdI69955us3orjKGlVr/SKNZg2DQZuNqsjQ=
 github.com/fsnotify/fsnotify v1.4.7/go.mod h1:jwhsz4b93w/PPRr/qN1Yymfu8t87LnFCMoQvtojpjFo=
 github.com/fsnotify/fsnotify v1.4.9/go.mod h1:znqG4EE+3YCdAaPaxE2ZRY/06pZUdp0tY4IgpuI1SZQ=
 github.com/fsnotify/fsnotify v1.5.4 h1:jRbGcIw6P2Meqdwuo0H1p6JVLbL5DHKAKlYndzMwVZI=

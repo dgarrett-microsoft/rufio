@@ -1,4 +1,4 @@
-module github.com/tinkerbell/rufio
+module github.com/dgarrett-microsoft/rufio
 
 go 1.18
 

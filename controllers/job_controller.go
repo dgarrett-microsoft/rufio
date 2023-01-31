@@ -19,6 +19,7 @@ package controllers
 import (
 	"context"
 	"fmt"
+	"time"
 
 	"github.com/go-logr/logr"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
@@ -138,7 +139,7 @@ func (r *JobReconciler) reconcile(ctx context.Context, job *bmcv1alpha1.Job, job
 			return ctrl.Result{}, err
 		}
 
-		return ctrl.Result{}, nil
+		return ctrl.Result{RequeueAfter: time.Second}, nil
 	}
 
 	// Check if all Job tasks have Completed
@@ -166,7 +167,7 @@ func (r *JobReconciler) reconcile(ctx context.Context, job *bmcv1alpha1.Job, job
 
 	// Patch the status at the end of reconcile loop
 	err = r.patchStatus(ctx, job, jobPatch)
-	return ctrl.Result{}, err
+	return ctrl.Result{RequeueAfter: time.Second}, err
 }
 
 // getMachine Gets the Machine from MachineRef

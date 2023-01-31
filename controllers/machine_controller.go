@@ -21,6 +21,7 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/go-logr/logr"
 	corev1 "k8s.io/api/core/v1"
@@ -174,7 +175,7 @@ func (r *MachineReconciler) patchStatus(ctx context.Context, bm *bmcv1alpha1.Mac
 		return ctrl.Result{}, fmt.Errorf("failed to patch Machine %s/%s status: %v", bm.Namespace, bm.Name, err)
 	}
 
-	return ctrl.Result{}, nil
+	return ctrl.Result{RequeueAfter: 15 * time.Second}, nil
 }
 
 // convertRawBMCPowerState takes a raw BMC power state response and attempts to convert it to

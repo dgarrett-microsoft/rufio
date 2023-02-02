@@ -37,7 +37,7 @@ func NewBMCClientFactoryFunc(ctx context.Context) BMCClientFactoryFunc {
 		client := bmclib.NewClient(hostIP, port, username, password)
 
 		// TODO (pokearu): Make an option
-		client.Registry.Drivers = client.Registry.PreferDriver("gofish")
+		client.Registry.Drivers = client.Registry.For("gofish")
 		if err := client.Open(ctx); err != nil {
 			return nil, fmt.Errorf("failed to open connection to BMC: %v", err)
 		}

@@ -191,7 +191,8 @@ func (r *TaskReconciler) runTask(ctx context.Context, task bmcv1alpha1.Action, b
 		if err != nil {
 			return false, fmt.Errorf("failed to perform PowerAction: %v", err)
 		}
-		return false, nil
+		r, err := r.checkTaskStatus(ctx, task, bmcClient)
+		return r.IsZero(), err
 	}
 
 	if task.OneTimeBootDeviceAction != nil {

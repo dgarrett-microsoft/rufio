@@ -74,7 +74,7 @@ require (
 	github.com/stmcginnis/gofish v0.13.1-0.20221107140645-5cc43fad050f // indirect
 	go.uber.org/atomic v1.7.0 // indirect
 	go.uber.org/multierr v1.6.0 // indirect
-	golang.org/x/crypto v0.0.0-20220525230936-793ad666bf5e // indirect
+	golang.org/x/crypto v0.1.0 // indirect
 	golang.org/x/lint v0.0.0-20210508222113-6edffad5e616 // indirect
 	golang.org/x/mod v0.7.0 // indirect
 	golang.org/x/net v0.2.0 // indirect
@@ -100,4 +100,4 @@ require (
 	sigs.k8s.io/yaml v1.3.0 // indirect
 )
 
-replace github.com/bmc-toolbox/bmclib/v2 v2.0.1-0.20221202150410-31e3dc1a1588 => github.com/fintelia/bmclib/v2 v2.0.0-20230127234219-1e2dfc0bb733
+replace github.com/bmc-toolbox/bmclib/v2 v2.0.1-0.20221202150410-31e3dc1a1588 => github.com/fintelia/bmclib/v2 v2.0.0-20230130235100-2117d228eec0

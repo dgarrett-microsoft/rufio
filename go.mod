@@ -100,4 +100,4 @@ require (
 	sigs.k8s.io/yaml v1.3.0 // indirect
 )
 
-replace github.com/bmc-toolbox/bmclib/v2 v2.0.1-0.20221202150410-31e3dc1a1588 => github.com/fintelia/bmclib/v2 v2.0.0-20230130235100-2117d228eec0
+replace github.com/bmc-toolbox/bmclib/v2 v2.0.1-0.20221202150410-31e3dc1a1588 => github.com/dgarrett-microsoft/bmclib/v2 v2.0.0-20230323012131-6022d287f4fc
